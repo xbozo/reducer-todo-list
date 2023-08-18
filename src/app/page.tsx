@@ -14,7 +14,7 @@ const Page = () => {
   }
 
   function handleAddTask() {
-    if(inputValue !== '') {
+    if(inputValue.trim() !== '') {
       dispatch({
         type: 'add',
         payload: {
@@ -82,29 +82,16 @@ const Page = () => {
         </div>
         {list.map((item, key) => (
           <div key={key} className="flex justify-between max-w-full">
-            <div className="flex items-center justify-between pb-2 container border-b border-gray-500 mt-6 w-screen max-w-5xl gap-3 flex-wrap">
-              {item.done ?
-                <ul className="flex items-center">
+            <div className="flex items-center justify-between flex-wrap gap-3 container w-screen pb-2 mt-6 border-b border-gray-500 lg:max-w-5xl">
+              <ul className="flex items-center">
                   <input
                     type="checkbox" 
                     checked={item.done} 
                     onClick={() => handleToggleAction(item.id)}
                     className="w-6 h-6 mr-5"
                   />
-                  <li className="text-red-400">{item.text}</li>
-                </ul>
-              : 
-                <ul className="flex items-center">
-                  <input
-                    type="checkbox" 
-                    checked={item.done} 
-                    onClick={() => handleToggleAction(item.id)}
-                    className="w-6 h-6 mr-5 items-center"
-                  />
-                  <li className="text-green-400">{item.text}</li>
-                </ul>
-              }
-
+                  <li className={`${item.done ? 'text-green-400' : 'text-red-400'}`}>{item.text}</li>
+              </ul>
               <div className="flex items-center gap-5">
                 <button 
                   className="bg-orange-400 py-1 px-4 rounded hover:bg-orange-500"
